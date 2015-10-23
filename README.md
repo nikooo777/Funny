@@ -15,7 +15,7 @@ id ::= Id .<br />
 sequence ::= optAssignment ( ";" optAssignment )* .<br />
 optAssignment := assignment? .<br />
 assignment ::= Id ( "=" | "+=" | "-=" | "*=" | "/=" | "%=" ) assignment<br />
-	| logicalOr .<br />
+    | logicalOr .<br />
 <br />
 logicalOr ::= logicalAnd ( "||" logicalOr )? .<br />
 logicalAnd ::= equality ( "&&" logicalAnd )? .<br />
@@ -24,17 +24,17 @@ comparison ::= add ( ( "<" | "<=" | ">" | ">=" ) add )? .<br />
 add ::= mult ( ( "+" | "-" ) mult )* .<br />
 mult ::= unary ( ( "*" | "/" | "%" ) unary )* .<br />
 unary ::= ( "+" | "-" | "!" ) unary<br />
-	| postfix .<br />
+    | postfix .<br />
 <br />
 postfix ::= primary args* .<br />
 args ::= "(" ( sequence ( "," sequence )* )? ")" .<br />
 primary ::= num | bool | nil | string<br />
-	| getId<br />
-	| function<br />
-	| subsequence<br />
-	| cond<br />
-	| loop<br />
-	| print .<br />
+    | getId<br />
+    | function<br />
+    | subsequence<br />
+    | cond<br />
+    | loop<br />
+    | print .<br />
 <br />
 num ::= Num .<br />
 bool ::= True | False .<br />
