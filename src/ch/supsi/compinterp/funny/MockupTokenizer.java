@@ -13,7 +13,7 @@ public class MockupTokenizer
 
 	MockupTokenizer(final Reader in) throws IOException
 	{
-		tokens.add(new Token((Token.Type.OpenBraces)));
+		tokens.add(new Token((Token.Type.OpenBrace)));
 		tokens.add(new Token((Token.Type.OpenParen)));
 		tokens.add(new Token((Token.Type.Id)));
 		tokens.add(new Token((Token.Type.CloseParen)));

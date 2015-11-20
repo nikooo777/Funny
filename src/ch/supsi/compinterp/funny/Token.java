@@ -47,7 +47,7 @@ class Token
 		Star,
 		OpenParen,
 		CloseParen,
-		OpenBraces,
+		OpenBrace,
 		CloseBraces,
 		SemiColon,
 		To,
@@ -98,5 +98,11 @@ class Token
 	Type type()
 	{
 		return type;
+	}
+
+	public String name()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
