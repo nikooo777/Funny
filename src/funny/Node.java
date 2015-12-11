@@ -5,8 +5,9 @@
 
 package funny;
 
-abstract class Node {
+abstract class Node
+{
 
-    abstract Val eval(Env env);
+	abstract Val eval(Env env);
 
 }

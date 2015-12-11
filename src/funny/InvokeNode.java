@@ -5,19 +5,22 @@
 
 package funny;
 
-class InvokeNode extends Node {
+class InvokeNode extends Node
+{
 
-    private final Node node;
-    private final NodeList args;
+	private final Node node;
+	private final NodeList args;
 
-    InvokeNode(Node node, NodeList args) {
-        this.node = node;
-        this.args = args;
-    }
+	InvokeNode(Node node, NodeList args)
+	{
+		this.node = node;
+		this.args = args;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
+	@Override
+	Val eval(Env env)
+	{
+		throw new InterpreterException("not yet implemented");
+	}
 
 }

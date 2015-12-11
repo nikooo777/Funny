@@ -5,19 +5,28 @@
 
 package funny;
 
-class BoolVal extends Val {
+class BoolVal extends Val
+{
 
-    static final BoolVal False = new BoolVal(false);
-    static final BoolVal True = new BoolVal(true);
+	static final BoolVal False = new BoolVal(false);
+	static final BoolVal True = new BoolVal(true);
 
-    private final boolean bool;
+	private final boolean bool;
 
-    private BoolVal(boolean bool) {
-        this.bool = bool;
-    }
+	private BoolVal(boolean bool)
+	{
+		this.bool = bool;
+	}
 
-    static BoolVal valueOf(boolean b) {
-        return b ? True : False;
-    }
-    
+	static BoolVal valueOf(boolean b)
+	{
+		return b ? True : False;
+	}
+
+	@Override
+	public String toString()
+	{
+		return Boolean.toString(this.bool);
+	}
+
 }

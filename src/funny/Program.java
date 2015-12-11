@@ -7,16 +7,19 @@ package funny;
 
 import java.util.ArrayList;
 
-class Program {
+class Program
+{
 
-    private final FunNode funNode;
+	private final FunNode funNode;
 
-    Program(FunNode funNode) {
-        this.funNode = funNode;
-    }
+	Program(FunNode funNode)
+	{
+		this.funNode = funNode;
+	}
 
-    Val eval() {
-        return new InvokeNode(funNode, new NodeList(new ArrayList<Node>(0))).eval(null);
-    }
-    
+	Val eval()
+	{
+		return new InvokeNode(this.funNode, new NodeList(new ArrayList<Node>(0))).eval(null);
+	}
+
 }

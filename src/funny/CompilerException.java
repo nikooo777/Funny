@@ -5,10 +5,12 @@
 
 package funny;
 
-class CompilerException extends RuntimeException {
+class CompilerException extends RuntimeException
+{
 
-    CompilerException(String message) {
-        super("compiler: " + message);
-    }
+	CompilerException(String message)
+	{
+		super("compiler: " + message);
+	}
 
 }

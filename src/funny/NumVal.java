@@ -7,12 +7,14 @@ package funny;
 
 import java.math.BigDecimal;
 
-class NumVal extends Val {
+class NumVal extends Val
+{
 
-    private final BigDecimal num;
+	private final BigDecimal num;
 
-    NumVal(BigDecimal num) {
-        this.num = num;
-    }
+	NumVal(BigDecimal num)
+	{
+		this.num = num;
+	}
 
 }

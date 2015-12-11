@@ -7,19 +7,22 @@ package funny;
 
 import funny.Token.Type;
 
-class UnaryNode extends Node {
+class UnaryNode extends Node
+{
 
-    private final Type oper;
-    private final Node node;
+	private final Type oper;
+	private final Node node;
 
-    UnaryNode(Type oper, Node node) {
-        this.oper = oper;
-        this.node = node;
-    }
+	UnaryNode(Type oper, Node node)
+	{
+		this.oper = oper;
+		this.node = node;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
+	@Override
+	Val eval(Env env)
+	{
+		throw new InterpreterException("not yet implemented");
+	}
 
 }

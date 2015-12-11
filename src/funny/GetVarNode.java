@@ -5,17 +5,20 @@
 
 package funny;
 
-class GetVarNode extends Node {
+class GetVarNode extends Node
+{
 
-    private final String id;
+	private final String id;
 
-    GetVarNode(String id) {
-        this.id = id;
-    }
+	GetVarNode(String id)
+	{
+		this.id = id;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
-    
+	@Override
+	Val eval(Env env)
+	{
+		return env.getVal(this.id);
+	}
+
 }

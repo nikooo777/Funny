@@ -5,14 +5,16 @@
 
 package funny;
 
-class ClosureVal extends Val {
+class ClosureVal extends Val
+{
 
-    private final Env env;
-    private final FunNode funNode;
+	private final Env env;
+	private final FunNode funNode;
 
-    ClosureVal(Env env, FunNode funNode) {
-        this.env = env;
-        this.funNode = funNode;
-    }
+	ClosureVal(Env env, FunNode funNode)
+	{
+		this.env = env;
+		this.funNode = funNode;
+	}
 
 }

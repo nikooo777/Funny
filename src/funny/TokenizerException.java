@@ -5,10 +5,12 @@
 
 package funny;
 
-class TokenizerException extends RuntimeException {
+class TokenizerException extends RuntimeException
+{
 
-    TokenizerException(String message) {
-        super("tokenizer: " + message);
-    }
-    
+	TokenizerException(String message)
+	{
+		super("tokenizer: " + message);
+	}
+
 }

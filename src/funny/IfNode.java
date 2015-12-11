@@ -5,23 +5,26 @@
 
 package funny;
 
-import static funny.Token.Type;
+import funny.Token.Type;
 
-class IfNode extends Node {
+class IfNode extends Node
+{
 
-    private final Node condNode;
-    private final Node thenNode;
-    private final Node elseNode;
+	private final Node condNode;
+	private final Node thenNode;
+	private final Node elseNode;
 
-    IfNode(Type type, Node condNode, Node thenNode, Node elseNode) {
-        this.condNode = condNode;
-        this.thenNode = thenNode;
-        this.elseNode = elseNode;
-    }
+	IfNode(Type type, Node condNode, Node thenNode, Node elseNode)
+	{
+		this.condNode = condNode;
+		this.thenNode = thenNode;
+		this.elseNode = elseNode;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
+	@Override
+	Val eval(Env env)
+	{
+		throw new InterpreterException("not yet implemented");
+	}
 
 }

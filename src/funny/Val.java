@@ -5,11 +5,24 @@
 
 package funny;
 
-abstract class Val extends Node {
+abstract class Val extends Node
+{
+	@Override
+	Val eval(Env env)
+	{
+		return this;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
+	boolean isString()
+	{
+		return false;
+	}
+
+	public Val plus(Val val)
+	{
+		if (val.isString())
+			return new StringVal(toString() + val);
+		throw new InterpreterException("Plus can't be applied to this val");
+	}
 
 }

@@ -5,11 +5,18 @@
 
 package funny;
 
-class NilVal extends Val {
+class NilVal extends Val
+{
 
-    static final NilVal nil = new NilVal();
-    
-    private NilVal() {
-    }
+	static final NilVal nil = new NilVal();
 
+	private NilVal()
+	{
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Nil";
+	}
 }

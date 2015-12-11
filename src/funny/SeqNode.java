@@ -5,17 +5,25 @@
 
 package funny;
 
-class SeqNode extends Node {
+class SeqNode extends Node
+{
 
-    private final NodeList nodes;
+	private final NodeList nodes;
 
-    SeqNode(NodeList nodes) {
-        this.nodes = nodes;
-    }
+	SeqNode(NodeList nodes)
+	{
+		this.nodes = nodes;
+	}
 
-    @Override
-    Val eval(Env env) {
-        throw new InterpreterException("not yet implemented");
-    }
+	@Override
+	Val eval(Env env)
+	{
+		Val val = NilVal.nil;
+		for (Node node : this.nodes.asArrayList())
+		{
+			val = node.eval(env);
+		}
+		return val;
+	}
 
 }

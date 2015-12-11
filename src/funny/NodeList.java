@@ -7,12 +7,19 @@ package funny;
 
 import java.util.ArrayList;
 
-class NodeList {
+class NodeList
+{
 
-    private final ArrayList<Node> nodes;
+	private final ArrayList<Node> nodes;
 
-    NodeList(ArrayList<Node> nodes) {
-        this.nodes = nodes;
-    }
+	NodeList(ArrayList<Node> nodes)
+	{
+		this.nodes = nodes;
+	}
+
+	ArrayList<Node> asArrayList()
+	{
+		return this.nodes;
+	}
 
 }

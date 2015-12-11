@@ -7,27 +7,32 @@ package funny;
 
 import java.util.ArrayList;
 
-class Scope {
+class Scope
+{
 
-    private final ArrayList<String> temps;
-    private final Scope enclosing;
+	private final ArrayList<String> temps;
+	private final Scope enclosing;
 
-    Scope(ArrayList<String> temps, Scope scope) {
-        this.temps = temps;
-        this.enclosing = scope;
-    }
+	Scope(ArrayList<String> temps, Scope scope)
+	{
+		this.temps = temps;
+		this.enclosing = scope;
+	}
 
-    Scope enclosing() {
-        return enclosing;
-    }
+	Scope enclosing()
+	{
+		return this.enclosing;
+	}
 
-    void checkInScope(String id) {
-        if (!isInScope(id))
-            throw new CompilerException("id " + id + " is not in scope");
-    }
-    
-    private boolean isInScope(String id) {
-        return temps.contains(id) ? true : enclosing != null ? enclosing.isInScope(id) : false;
-    }
-    
+	void checkInScope(String id)
+	{
+		if (!isInScope(id))
+			throw new CompilerException("id " + id + " is not in scope");
+	}
+
+	private boolean isInScope(String id)
+	{
+		return this.temps.contains(id) ? true : this.enclosing != null ? this.enclosing.isInScope(id) : false;
+	}
+
 }

@@ -5,10 +5,12 @@
 
 package funny;
 
-class InterpreterException extends RuntimeException {
+class InterpreterException extends RuntimeException
+{
 
-    InterpreterException(String message) {
-        super("interpreter: " + message);
-    }
+	InterpreterException(String message)
+	{
+		super("interpreter: " + message);
+	}
 
 }
