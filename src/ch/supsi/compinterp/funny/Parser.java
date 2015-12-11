@@ -254,8 +254,9 @@ public class Parser
 	 * optAssignment := assignment? .
 	 * 
 	 * @return
+	 * @throws IOException 
 	 */
-	private Node optAssignment()
+	private Node optAssignment() throws IOException
 	{
 		return isInFirstOfAssignment() ? assignment() : null;
 	}
@@ -282,6 +283,22 @@ public class Parser
 		}
 		// SONO FERMO QUA --------> | logicalOr .
 		return logicalOr();
+	}
+
+	private Node logicalOr() throws IOException
+	{
+		Node le = logicalAnd();
+		if (type()==Type.OrOr)
+		{
+			next();
+			Node lo = logicalOr();
+		}
+			
+	}
+
+	private Node logicalAnd()
+	{
+		
 	}
 
 	private boolean isAssignmentOperation()

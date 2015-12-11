@@ -33,4 +33,10 @@ public class MockupTokenizer
 	{
 		return tokens.get(pos - 1);
 	}
+
+	public void previous()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
