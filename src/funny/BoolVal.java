@@ -29,4 +29,15 @@ class BoolVal extends Val
 		return Boolean.toString(this.bool);
 	}
 
+	@Override
+	BoolVal checkBoolean()
+	{
+		return this;
+	}
+	
+	boolean bool()
+	{
+		return bool;
+	}
+	
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright Â© 2011-2015, SUPSI. All rights reserved.
+ * Copyright © 2011-2015, SUPSI. All rights reserved.
  * Author: Raffaello Giulietti
  */
 
@@ -22,7 +22,16 @@ class PrintNode extends Node
 	@Override
 	Val eval(Env env)
 	{
-		throw new InterpreterException("not yet implemented");
+		Val val = NilVal.nil;
+		for (Node node : this.args.asArrayList())
+		{
+			val = node.eval(env);
+			System.out.print(val);
+		}
+		if (type == Type.Println)
+		{
+			System.out.println();
+		}
+		return val;
 	}
-
 }

@@ -5,6 +5,8 @@
 
 package funny;
 
+import java.math.BigDecimal;
+
 abstract class Val extends Node
 {
 	@Override
@@ -25,4 +27,14 @@ abstract class Val extends Node
 		throw new InterpreterException("Plus can't be applied to this val");
 	}
 
+	BoolVal checkBoolean()
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	NumVal checkNum()
+	{
+		throw new InterpreterException("This is not a number");
+	}
+	
 }
