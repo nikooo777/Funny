@@ -25,18 +25,59 @@ class Token
 		Bob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09, // begin of reserved words
 														// block
 
-		Nil, False, True, If, IfNot, Then, Else, Fi, While, WhileNot, Do, Od, Print, Println,
+		Nil,
+		False,
+		True,
+		If,
+		IfNot,
+		Then,
+		Else,
+		Fi,
+		While,
+		WhileNot,
+		Do,
+		Od,
+		Print,
+		Println,
 
 		Eob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09, // end of reserved words
 														// block
 
-		Id, Num, String,
+		Id,
+		Num,
+		String,
 
-		Semicolon, Comma, To,
+		Semicolon,
+		Comma,
+		To,
 
-		OpenParen, CloseParen, OpenBrace, CloseBrace, Not, Times, Div, Mod, Plus, Minus, Lt, Le, Gt, Ge, Eq, Ne, LogAnd, LogOr, Becomes, PlusBecomes, MinusBecomes, TimesBecomes, DivBecomes, ModBecomes,
+		OpenParen,
+		CloseParen,
+		OpenBrace,
+		CloseBrace,
+		Not,
+		Times,
+		Div,
+		Mod,
+		Plus,
+		Minus,
+		Lt,
+		Le,
+		Gt,
+		Ge,
+		Eq,
+		Ne,
+		LogAnd,
+		LogOr,
+		Becomes,
+		PlusBecomes,
+		MinusBecomes,
+		TimesBecomes,
+		DivBecomes,
+		ModBecomes,
 
-		Eos, Unknown,
+		Eos,
+		Unknown,
 	}
 
 	private static final HashMap<String, Token> reserved = new HashMap<String, Token>();
@@ -48,8 +89,7 @@ class Token
 	static
 	{
 		Type[] values = Type.values();
-		for (int i = Type.Bob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09.ordinal()
-				+ 1; i < Type.Eob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09.ordinal(); ++i)
+		for (int i = Type.Bob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09.ordinal() + 1; i < Type.Eob_7cc9d33489e99a8b210379e7a3a3b2e7b102fd09.ordinal(); ++i)
 			reserved.put(values[i].name().toLowerCase(Locale.US), new Token(values[i]));
 	}
 

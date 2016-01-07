@@ -34,10 +34,10 @@ class BoolVal extends Val
 	{
 		return this;
 	}
-	
+
 	boolean bool()
 	{
 		return bool;
 	}
-	
+
 }

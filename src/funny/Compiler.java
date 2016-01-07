@@ -20,7 +20,7 @@ class Compiler
 
 	Compiler(Reader in) throws IOException
 	{
-		this.tokenizer = new Tokenizer(in);
+		tokenizer = new Tokenizer(in);
 		next();
 	}
 
@@ -73,7 +73,7 @@ class Compiler
 	private ArrayList<String> optIds() throws IOException
 	{
 		ArrayList<String> ids = new ArrayList<String>();
-		if (isInFirstOfId())
+		if (!isInFirstOfId())
 			return ids;
 		ids.add(id());
 		while (type() == Type.Comma)
@@ -150,7 +150,7 @@ class Compiler
 				next();
 				return new SetVarNode(id, combineWithOp(id, type, assignment(scope)));
 			}
-			this.tokenizer.prev();
+			tokenizer.prev();
 		}
 		return logicalOr(scope);
 	}
@@ -288,8 +288,8 @@ class Compiler
 	}
 
 	/*
-	 * An imperative way to build a left-leaning AST from a production with
-	 * repetition.
+	 * An imperative way to build a left-leaning AST
+	 * from a production with repetition.
 	 */
 	// add ::= mult ( ( "+" | "-" ) mult )* .
 	private Node add(Scope scope) throws IOException
@@ -478,8 +478,7 @@ class Compiler
 		return new WhileNode(type, condExpr, doExpr);
 	}
 
-	// cond ::= ( "if" | "ifnot" ) sequence "then" sequence ( "else" sequence )?
-	// "fi" .
+	// cond ::= ( "if" | "ifnot" ) sequence "then" sequence ( "else" sequence )? "fi" .
 	private IfNode cond(Scope scope) throws IOException
 	{
 		check(Type.If, Type.IfNot, "if / ifnot");
@@ -583,12 +582,12 @@ class Compiler
 
 	private Token token()
 	{
-		return this.tokenizer.token();
+		return tokenizer.token();
 	}
 
 	private void next() throws IOException
 	{
-		this.tokenizer.next();
+		tokenizer.next();
 	}
 
 }

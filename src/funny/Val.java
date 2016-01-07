@@ -36,5 +36,5 @@ abstract class Val extends Node
 	{
 		throw new InterpreterException("This is not a number");
 	}
-	
+
 }

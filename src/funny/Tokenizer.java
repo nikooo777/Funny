@@ -33,35 +33,35 @@ class Tokenizer
 
 	Token prev()
 	{
-		if (this.stepBack)
+		if (stepBack)
 			throw new TokenizerException("already in step back mode");
-		this.stepBack = true;
-		return this.prevToken;
+		stepBack = true;
+		return prevToken;
 	}
 
 	Token token()
 	{
-		return this.stepBack ? this.prevToken : this.token;
+		return stepBack ? prevToken : token;
 	}
 
 	Token next() throws IOException
 	{
-		if (this.stepBack)
+		if (stepBack)
 		{
-			this.stepBack = false;
-			return this.token;
+			stepBack = false;
+			return token;
 		}
-		this.prevToken = this.token;
+		prevToken = token;
 		skipWhites();
-		if ((this.token = id()) != null)
-			return this.token;
-		if ((this.token = num()) != null)
-			return this.token;
-		if ((this.token = operatorOrDelimiter()) != null)
-			return this.token;
-		if ((this.token = string()) != null)
-			return this.token;
-		return this.token = Token.simple(Type.Unknown);
+		if ((token = id()) != null)
+			return token;
+		if ((token = num()) != null)
+			return token;
+		if ((token = operatorOrDelimiter()) != null)
+			return token;
+		if ((token = string()) != null)
+			return token;
+		return token = Token.simple(Type.Unknown);
 	}
 
 	/*
@@ -71,7 +71,7 @@ class Tokenizer
 	private Token operatorOrDelimiter() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case EOS:
 			return Token.simple(Type.Eos);
@@ -116,7 +116,7 @@ class Tokenizer
 	private Token andOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '&':
 			return Token.simple(Type.LogAnd);
@@ -127,7 +127,7 @@ class Tokenizer
 	private Token orOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '|':
 			return Token.simple(Type.LogOr);
@@ -138,7 +138,7 @@ class Tokenizer
 	private Token lessOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.Le);
@@ -149,7 +149,7 @@ class Tokenizer
 	private Token greaterOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.Ge);
@@ -160,7 +160,7 @@ class Tokenizer
 	private Token bangOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.Ne);
@@ -171,7 +171,7 @@ class Tokenizer
 	private Token equalsOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.Eq);
@@ -182,7 +182,7 @@ class Tokenizer
 	private Token divOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.DivBecomes);
@@ -193,7 +193,7 @@ class Tokenizer
 	private Token modOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.ModBecomes);
@@ -204,7 +204,7 @@ class Tokenizer
 	private Token timesOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.TimesBecomes);
@@ -215,7 +215,7 @@ class Tokenizer
 	private Token minusOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.MinusBecomes);
@@ -228,7 +228,7 @@ class Tokenizer
 	private Token plusOp() throws IOException
 	{
 		markAndRead(1);
-		switch (this.ch)
+		switch (ch)
 		{
 		case '=':
 			return Token.simple(Type.PlusBecomes);
@@ -237,23 +237,23 @@ class Tokenizer
 	}
 
 	/*
-	 * Upon entry the stream position is just before the id. Upon exit the
-	 * stream position is just after the id.
+	 * Upon entry the stream position is just before the id.
+	 * Upon exit the stream position is just after the id.
 	 */
 	private Token id() throws IOException
 	{
 		markAndRead(1);
 		if (!isIdStart())
 			return resetAndToken(null);
-		appendMarkAndRead();
-		while (isIdPart())
+		do
 			appendMarkAndRead();
-		return resetAndToken(Token.id(toStringAndClear()));
+		while (isIdPart());
+		return resetAndToken(Token.id(toStringAndReset()));
 	}
 
 	/*
-	 * Upon entry the stream position is just before the num. Upon exit the
-	 * stream position is just after the num.
+	 * Upon entry the stream position is just before the num.
+	 * Upon exit the stream position is just after the num.
 	 */
 	private Token num() throws IOException
 	{
@@ -276,15 +276,16 @@ class Tokenizer
 			digits();
 		} else
 			return resetAndToken(null);
-		markAndRead(3);
 		if (isExponentIndicator())
 			exponent();
-		return resetAndToken(Token.num(new BigDecimal(toStringAndClear())));
+		return resetAndToken(Token.num(new BigDecimal(toStringAndReset())));
 	}
 
 	private void exponent() throws IOException
 	{
-		int length = this.builder.length();
+		reset();
+		markAndRead(3);
+		int length = builder.length();
 		append();
 		read();
 		if (isSign())
@@ -295,40 +296,44 @@ class Tokenizer
 		if (isDigit())
 			digits();
 		else
-			this.builder.setLength(length);
+			builder.setLength(length);
 	}
 
 	private void digits() throws IOException
 	{
-		if (!(isDigit()))
-			throw new AssertionError();
-		appendMarkAndRead();
-		while (isDigit())
+		do
 			appendMarkAndRead();
-		reset();
+		while (isDigit());
 	}
 
 	/*
-	 * Strings are sequences of UTF-16 encoded Unicode characters enclosed in
-	 * quotation marks ". The following escape sequences are honored: \\ a
-	 * single \ \" a " \' a ' \r a CR \n a LF \t a HT \b a BS \f a FF \xuuuu,
-	 * where uuuu is a sequence of exactly 4 hexadecimal digits, is the Unicode
-	 * character U+uuuu Sequences of \CR or \LF are dropped
+	 * Strings are sequences of UTF-16 encoded Unicode characters enclosed in quotation marks ".
+	 * The following escape sequences are honored:
+	 * \\ a single \
+	 * \" a "
+	 * \' a '
+	 * \r a CR
+	 * \n a LF
+	 * \t a HT
+	 * \b a BS
+	 * \f a FF
+	 * \xuuuu, where uuuu is a sequence of exactly 4 hexadecimal digits, is the Unicode character U+uuuu
+	 * Sequences of \CR or \LF are dropped
 	 */
 	private Token string() throws IOException
 	{
 		markAndRead(1);
-		if (this.ch != '"')
+		if (ch != '"')
 			return resetAndToken(null);
 		for (;;)
 		{
 			markAndRead(1);
-			if (this.ch == '"')
+			if (ch == '"')
 			{
 				markAndRead(1);
 				break;
 			}
-			switch (this.ch)
+			switch (ch)
 			{
 			case '\\':
 				escapeSequence();
@@ -342,13 +347,13 @@ class Tokenizer
 				append();
 			}
 		}
-		return resetAndToken(Token.string(toStringAndClear()));
+		return resetAndToken(Token.string(toStringAndReset()));
 	}
 
 	private void escapeSequence() throws IOException
 	{
 		read();
-		switch (this.ch)
+		switch (ch)
 		{
 		case 'b':
 			append('\b');
@@ -401,20 +406,22 @@ class Tokenizer
 	}
 
 	/*
-	 * Upon entry stream position is before the optional whites. Upon exit
-	 * stream position is just after them.
+	 * Upon entry stream position is before the optional whites.
+	 * Upon exit stream position is just after them.
 	 */
 	private void skipWhites() throws IOException
 	{
 		for (;;)
 		{
-			markAndRead(2);
-			if (this.ch == '/')
+			markAndRead(1);
+			if (ch == '/')
 			{
+				reset();
+				markAndRead(2);
 				read();
-				if (this.ch == '/')
+				if (ch == '/')
 					skipLineComment();
-				else if (this.ch == '*')
+				else if (ch == '*')
 					skipNestingComment();
 				else
 					break;
@@ -429,19 +436,19 @@ class Tokenizer
 		for (;;)
 		{
 			read();
-			if (this.ch == EOS)
+			if (ch == EOS)
 				throw new TokenizerException("unclosed nesting comment");
-			if (this.ch == '*')
+			if (ch == '*')
 			{
 				read();
-				if (this.ch == '/')
+				if (ch == '/')
 					return;
 				continue;
 			}
-			if (this.ch == '/')
+			if (ch == '/')
 			{
 				read();
-				if (this.ch == '*')
+				if (ch == '*')
 					skipNestingComment();
 				else
 					continue;
@@ -451,35 +458,35 @@ class Tokenizer
 
 	private void skipLineComment() throws IOException
 	{
-		while (!isEol())
-			;
-		read();
+		do
+			read();
+		while (!isEol());
 	}
 
 	private void markAndRead(int readAheadLimit) throws IOException
 	{
-		this.in.mark(readAheadLimit);
+		in.mark(readAheadLimit);
 		read();
 	}
 
 	private void read() throws IOException
 	{
-		this.ch = this.in.read();
+		ch = in.read();
 	}
 
 	private void reset() throws IOException
 	{
-		this.in.reset();
+		in.reset();
 	}
 
 	private void append()
 	{
-		append(this.ch);
+		append(ch);
 	}
 
 	private void append(int c)
 	{
-		this.builder.append((char) c);
+		builder.append((char) c);
 	}
 
 	private void appendMarkAndRead() throws IOException
@@ -496,47 +503,47 @@ class Tokenizer
 
 	private boolean isEol()
 	{
-		return this.ch == CR || this.ch == LF || this.ch == EOS;
+		return ch == CR || ch == LF || ch == EOS;
 	}
 
 	private boolean isDigit()
 	{
-		return Character.isDigit(this.ch);
+		return Character.isDigit(ch);
 	}
 
 	private boolean isWhite()
 	{
-		return Character.isWhitespace(this.ch);
+		return Character.isWhitespace(ch);
 	}
 
 	private boolean isSign()
 	{
-		return this.ch == '-' || this.ch == '+';
+		return ch == '-' || ch == '+';
 	}
 
 	private boolean isExponentIndicator()
 	{
-		return this.ch == 'e' || this.ch == 'E';
+		return ch == 'e' || ch == 'E';
 	}
 
 	private boolean isFractionIndicator()
 	{
-		return this.ch == '.';
+		return ch == '.';
 	}
 
 	private boolean isIdPart()
 	{
-		return Character.isJavaIdentifierPart(this.ch);
+		return Character.isJavaIdentifierPart(ch);
 	}
 
 	private boolean isIdStart()
 	{
-		return Character.isJavaIdentifierStart(this.ch);
+		return Character.isJavaIdentifierStart(ch);
 	}
 
 	private int hexDigit()
 	{
-		switch (this.ch)
+		switch (ch)
 		{
 		case '0':
 		case '1':
@@ -548,30 +555,30 @@ class Tokenizer
 		case '7':
 		case '8':
 		case '9':
-			return this.ch - '0';
+			return ch - '0';
 		case 'A':
 		case 'B':
 		case 'C':
 		case 'D':
 		case 'E':
 		case 'F':
-			return 10 + (this.ch - 'A');
+			return 10 + (ch - 'A');
 		case 'a':
 		case 'b':
 		case 'c':
 		case 'd':
 		case 'e':
 		case 'f':
-			return 10 + (this.ch - 'a');
+			return 10 + (ch - 'a');
 		default:
 			return -1;
 		}
 	}
 
-	private String toStringAndClear()
+	private String toStringAndReset()
 	{
-		String s = this.builder.toString();
-		this.builder.setLength(0);
+		String s = builder.toString();
+		builder.setLength(0);
 		return s;
 	}
 

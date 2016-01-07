@@ -26,7 +26,7 @@ class WhileNode extends Node
 	{
 		Val val = NilVal.nil;
 		boolean invert = type == Type.WhileNot;
-		while (!condNode.eval(env).checkBoolean().bool() ^ invert )
+		while (!condNode.eval(env).checkBoolean().bool() ^ invert)
 			val = doNode.eval(env);
 		return val;
 	}
