@@ -7,7 +7,6 @@ package funny;
 
 class SetVarNode extends Node
 {
-
 	private final String id;
 	private final Node node;
 
@@ -22,5 +21,4 @@ class SetVarNode extends Node
 	{
 		return env.setVal(this.id, this.node.eval(env));
 	}
-
 }

@@ -5,8 +5,6 @@
 
 package funny;
 
-import java.math.BigDecimal;
-
 abstract class Val extends Node
 {
 	@Override
@@ -20,11 +18,26 @@ abstract class Val extends Node
 		return false;
 	}
 
-	public Val plus(Val val)
+	Val plus(Val val)
 	{
 		if (val.isString())
 			return new StringVal(toString() + val);
 		throw new InterpreterException("Plus can't be applied to this val");
+	}
+
+	Val plus()
+	{
+		throw new InterpreterException("Plus can't be applied to this val");
+	}
+
+	Val minus(Val eval)
+	{
+		throw new InterpreterException("Minus can't be applied to this val");
+	}
+
+	Val minus()
+	{
+		throw new InterpreterException("Minus can't be applied to this val");
 	}
 
 	BoolVal checkBoolean()
@@ -37,4 +50,43 @@ abstract class Val extends Node
 		throw new InterpreterException("This is not a number");
 	}
 
+	BoolVal eq(Val eval)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal neq(Val val)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal lt(Val val)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal gt(Val val)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal leq(Val val)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal geq(Val val)
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	BoolVal not()
+	{
+		throw new InterpreterException("This is not a boolean");
+	}
+
+	ClosureVal checkClosure()
+	{
+		throw new InterpreterException("This is not a a closure");
+	}
 }

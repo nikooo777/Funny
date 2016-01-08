@@ -47,5 +47,4 @@ class Frame
 		this.bindings.put(id, val);
 		return val;
 	}
-
 }

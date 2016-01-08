@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 class Scope
 {
-
 	private final ArrayList<String> temps;
 	private final Scope enclosing;
 
@@ -34,5 +33,4 @@ class Scope
 	{
 		return this.temps.contains(id) ? true : this.enclosing != null ? this.enclosing.isInScope(id) : false;
 	}
-
 }

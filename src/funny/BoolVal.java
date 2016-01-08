@@ -35,9 +35,15 @@ class BoolVal extends Val
 		return this;
 	}
 
+	@Override
+	BoolVal not()
+	{
+		return BoolVal.valueOf(!this.bool);
+	}
+
 	boolean bool()
 	{
-		return bool;
+		return this.bool;
 	}
 
 }

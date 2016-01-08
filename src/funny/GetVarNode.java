@@ -7,7 +7,6 @@ package funny;
 
 class GetVarNode extends Node
 {
-
 	private final String id;
 
 	GetVarNode(String id)
@@ -20,5 +19,4 @@ class GetVarNode extends Node
 	{
 		return env.getVal(this.id);
 	}
-
 }

@@ -5,6 +5,8 @@
 
 package funny;
 
+import java.util.ArrayList;
+
 class ClosureVal extends Val
 {
 
@@ -17,4 +19,14 @@ class ClosureVal extends Val
 		this.funNode = funNode;
 	}
 
+	Val apply(ArrayList<Val> argVals)
+	{
+		return this.funNode.code().eval(new Env(new Frame(this.funNode.params(), this.funNode.locals(), argVals), this.env));
+	}
+
+	@Override
+	ClosureVal checkClosure()
+	{
+		return this;
+	}
 }

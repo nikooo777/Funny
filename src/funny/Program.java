@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 class Program
 {
-
 	private final FunNode funNode;
 
 	Program(FunNode funNode)
@@ -21,5 +20,4 @@ class Program
 	{
 		return new InvokeNode(this.funNode, new NodeList(new ArrayList<Node>(0))).eval(null);
 	}
-
 }

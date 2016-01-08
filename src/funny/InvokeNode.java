@@ -20,7 +20,6 @@ class InvokeNode extends Node
 	@Override
 	Val eval(Env env)
 	{
-		throw new InterpreterException("not yet implemented");
+		return this.node.eval(env).checkClosure().apply(this.args.eval(env));
 	}
-
 }

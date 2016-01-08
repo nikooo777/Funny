@@ -11,7 +11,6 @@ import java.util.Locale;
 
 class Token
 {
-
 	static enum Type
 	{
 
@@ -153,5 +152,4 @@ class Token
 		sb.append("]");
 		return sb.toString();
 	}
-
 }

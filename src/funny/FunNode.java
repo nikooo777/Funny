@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 class FunNode extends Node
 {
-
 	private final ArrayList<String> params;
 	private final ArrayList<String> locals;
 	private final Node code;
@@ -24,7 +23,21 @@ class FunNode extends Node
 	@Override
 	Val eval(Env env)
 	{
-		throw new InterpreterException("not yet implemented");
+		return new ClosureVal(env, this);
 	}
 
+	Node code()
+	{
+		return this.code;
+	}
+
+	ArrayList<String> locals()
+	{
+		return this.locals;
+	}
+
+	ArrayList<String> params()
+	{
+		return this.params;
+	}
 }

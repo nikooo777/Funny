@@ -9,7 +9,6 @@ import funny.Token.Type;
 
 class WhileNode extends Node
 {
-
 	private final Node condNode;
 	private final Node doNode;
 	private Type type;
@@ -25,9 +24,9 @@ class WhileNode extends Node
 	Val eval(Env env)
 	{
 		Val val = NilVal.nil;
-		boolean invert = type == Type.WhileNot;
-		while (!condNode.eval(env).checkBoolean().bool() ^ invert)
-			val = doNode.eval(env);
+		boolean invert = this.type == Type.WhileNot;
+		while (!this.condNode.eval(env).checkBoolean().bool() ^ invert)
+			val = this.doNode.eval(env);
 		return val;
 	}
 }

@@ -7,7 +7,6 @@ package funny;
 
 class StringVal extends Val
 {
-
 	private final String string;
 
 	StringVal(String string)

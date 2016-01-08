@@ -9,7 +9,6 @@ import funny.Token.Type;
 
 class UnaryNode extends Node
 {
-
 	private final Type oper;
 	private final Node node;
 
@@ -22,7 +21,14 @@ class UnaryNode extends Node
 	@Override
 	Val eval(Env env)
 	{
-		throw new InterpreterException("not yet implemented");
+		switch (this.oper)
+		{
+		case Not:
+			return this.node.eval(env).not();
+		case Minus:
+			return this.node.eval(env).minus();
+		default:
+			throw new InterpreterException("Unimplemented unary operation");
+		}
 	}
-
 }

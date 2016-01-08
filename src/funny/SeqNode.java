@@ -7,7 +7,6 @@ package funny;
 
 class SeqNode extends Node
 {
-
 	private final NodeList nodes;
 
 	SeqNode(NodeList nodes)
@@ -25,5 +24,4 @@ class SeqNode extends Node
 		}
 		return val;
 	}
-
 }

@@ -22,4 +22,13 @@ class NodeList
 		return this.nodes;
 	}
 
+	ArrayList<Val> eval(Env env)
+	{
+		ArrayList<Val> vals = new ArrayList<>();
+		for (Node n : this.nodes)
+		{
+			vals.add(n.eval(env));
+		}
+		return vals;
+	}
 }
