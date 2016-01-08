@@ -6,6 +6,7 @@
 package funny;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 class NumVal extends Val
 {
@@ -23,6 +24,18 @@ class NumVal extends Val
 	}
 
 	@Override
+	Val times(Val val)
+	{
+		return new NumVal(this.num.multiply(val.checkNum().num));
+	}
+
+	@Override
+	Val divide(Val val)
+	{
+		return new NumVal(this.num.divide(val.checkNum().num, MathContext.DECIMAL128));
+	}
+
+	@Override
 	NumVal plus(Val val)
 	{
 		return new NumVal(this.num.add(val.checkNum().num));
@@ -37,13 +50,13 @@ class NumVal extends Val
 	@Override
 	NumVal plus()
 	{
-		return new NumVal(this.num.add(new BigDecimal(1)));
+		return new NumVal(this.num.plus());
 	};
 
 	@Override
 	NumVal minus()
 	{
-		return new NumVal(this.num.subtract(new BigDecimal(1)));
+		return new NumVal(this.num.negate());
 	};
 
 	@Override
@@ -79,7 +92,12 @@ class NumVal extends Val
 	@Override
 	BoolVal geq(Val val)
 	{
-		return BoolVal.valueOf(this.num.compareTo(checkNum().num) >= 0);
+		return BoolVal.valueOf(this.num.compareTo(val.checkNum().num) >= 0);
 	}
 
+	@Override
+	public String toString()
+	{
+		return this.num.toString();
+	}
 }

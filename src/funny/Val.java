@@ -89,4 +89,14 @@ abstract class Val extends Node
 	{
 		throw new InterpreterException("This is not a a closure");
 	}
+
+	Val times(Val val)
+	{
+		throw new InterpreterException("Times can't be applied to this val");
+	}
+
+	Val divide(Val val)
+	{
+		throw new InterpreterException("Divide can't be applied to this val");
+	}
 }

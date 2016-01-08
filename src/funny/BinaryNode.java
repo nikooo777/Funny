@@ -31,9 +31,9 @@ class BinaryNode extends Node
 		case Minus:
 			return this.left.eval(env).minus(this.right.eval(env));
 		case Times:
-			throw new InterpreterException("Unimplemented binary operation");
+			return this.left.eval(env).times(this.right.eval(env));
 		case Div:
-			throw new InterpreterException("Unimplemented binary operation");
+			return this.left.eval(env).divide(this.right.eval(env));
 		case Gt:
 			return this.left.eval(env).gt(this.right.eval(env));
 		case Lt:
@@ -45,9 +45,9 @@ class BinaryNode extends Node
 		case Le:
 			return this.left.eval(env).leq(this.right.eval(env));
 		case Ne:
-			return this.left.eval(env).eq(this.right.eval(env));
-		case Eq:
 			return this.left.eval(env).neq(this.right.eval(env));
+		case Eq:
+			return this.left.eval(env).eq(this.right.eval(env));
 
 		default:
 			throw new InterpreterException("Unimplemented binary operation");

@@ -7,6 +7,7 @@
 */
 
 
+
 /*
 {_true, _false, _if ->
     _true = {(t, f) -> t};
@@ -32,7 +33,6 @@
         };
         sqrtIter(1)
     };
-
     x = 2;
     println("sqrt(", x, "): ", sqrt(x));
 }
@@ -76,11 +76,19 @@
         fi
     };
     
-    println(change(10, 0))
+    println(change(500, 0))
 }
 */
 
-
+/*
+{var->
+print(5+3);
+var=2+2;
+if var == 4 then
+print(5*5);
+fi
+}
+*/
 
 /*
 {makeCounter, myCounter, yourCounter, n ->
@@ -138,10 +146,11 @@
         if n < 2 then n else fib(n - 1) + fib(n - 2) fi
     };
     
-    println(fib(40))
-}
-*/
+    println(fib(10))
+}*/
 
+
+//this doesn't work!
 /*
 {fib ->
     fib = {(n) fib0, fib1, fib ->
