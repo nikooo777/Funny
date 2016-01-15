@@ -39,7 +39,7 @@ class BinaryNode extends Node
 		case Lt:
 			return this.left.eval(env).lt(this.right.eval(env));
 		case Mod:
-			throw new InterpreterException("Unimplemented binary operation");
+			return this.left.eval(env).mod(this.right.eval(env));
 		case Ge:
 			return this.left.eval(env).geq(this.right.eval(env));
 		case Le:

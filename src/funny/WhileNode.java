@@ -11,11 +11,11 @@ class WhileNode extends Node
 {
 	private final Node condNode;
 	private final Node doNode;
-	private Type type;
+	private boolean invert;
 
 	WhileNode(Type type, Node condNode, Node doNode)
 	{
-		this.type = type;
+		this.invert = type == Type.WhileNot;
 		this.condNode = condNode;
 		this.doNode = doNode;
 	}
@@ -24,8 +24,7 @@ class WhileNode extends Node
 	Val eval(Env env)
 	{
 		Val val = NilVal.nil;
-		boolean invert = this.type == Type.WhileNot;
-		while (!this.condNode.eval(env).checkBoolean().bool() ^ invert)
+		while (this.condNode.eval(env).checkBoolean().bool() ^ this.invert)
 			val = this.doNode.eval(env);
 		return val;
 	}

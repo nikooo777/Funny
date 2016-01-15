@@ -99,4 +99,9 @@ abstract class Val extends Node
 	{
 		throw new InterpreterException("Divide can't be applied to this val");
 	}
+
+	Val mod(Val eval)
+	{
+		throw new InterpreterException("Modulo can't be applied to this val");
+	}
 }

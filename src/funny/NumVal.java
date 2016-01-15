@@ -7,10 +7,12 @@ package funny;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 
 class NumVal extends Val
 {
 	private final BigDecimal num;
+	static MathContext mc = new MathContext(100, RoundingMode.HALF_EVEN);
 
 	NumVal(BigDecimal num)
 	{
@@ -32,7 +34,13 @@ class NumVal extends Val
 	@Override
 	Val divide(Val val)
 	{
-		return new NumVal(this.num.divide(val.checkNum().num, MathContext.DECIMAL128));
+		try
+		{
+			return new NumVal(this.num.divide(val.checkNum().num));
+		} catch (Exception e)
+		{
+			return new NumVal(this.num.divide(val.checkNum().num, mc));
+		}
 	}
 
 	@Override
@@ -45,6 +53,12 @@ class NumVal extends Val
 	NumVal minus(Val val)
 	{
 		return new NumVal(this.num.subtract(val.checkNum().num));
+	};
+
+	@Override
+	NumVal mod(Val val)
+	{
+		return new NumVal(this.num.divideAndRemainder(val.checkNum().num)[1]);
 	};
 
 	@Override
